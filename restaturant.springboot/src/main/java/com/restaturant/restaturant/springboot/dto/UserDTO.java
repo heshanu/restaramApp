@@ -1,19 +1,18 @@
-package com.restaturant.restaturant.springboot.entity;
+package com.restaturant.restaturant.springboot.dto;
 
 import com.restaturant.restaturant.springboot.enums.UserRoleEnum;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-@Entity
 @Data
-@Table(name = "user")
-public class UserEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@AllArgsConstructor
+@NoArgsConstructor
+@DynamicUpdate
+@DynamicInsert
+public class UserDTO {
     private Long id;
     private String name;
     private String password;
