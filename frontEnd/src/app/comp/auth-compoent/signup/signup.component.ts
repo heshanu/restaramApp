@@ -28,12 +28,12 @@ export class SignupComponent implements OnInit{
       this.authService.signUp(this.validateForm.value).subscribe(
         data => {
           console.log(data);
-          this.notification.success('Success', 'Sign Up Success');
+          this.notification.success('Success', 'Sign Up Success', {nzDuration: 4000});
           
         },
         err => {
           console.log(err);
-          this.notification.error('Error', 'Sign Up Failed');
+          this.notification.error('Error', 'Sign Up Failed', {nzDuration: 4000});
         }
       );
 
