@@ -10,11 +10,13 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { ja_JP } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import ja from '@angular/common/locales/ja';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignupComponent } from './comp/auth-compoent/signup/signup.component';
 import { AuthService } from './service/auth.service';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { DemoNgZorroAntdModule } from '../DemoNgZorrowModule';
 
 registerLocaleData(ja);
 
@@ -31,7 +33,10 @@ registerLocaleData(ja);
     NzMenuModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    DemoNgZorroAntdModule,
+    FormsModule,ReactiveFormsModule
   ],
   providers: [
     AuthService,

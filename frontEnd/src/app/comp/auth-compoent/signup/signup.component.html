@@ -1,1 +1,32 @@
-<p>signup works!</p>
+
+<nz-page-header class="site-page-header" nzBackIcon nzTitle="restaurants App"></nz-page-header>
+
+<form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+    <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your name!">
+            <nz-input-group nzPrefixIcon="user">
+                <input type="text" nz-input formControlName="name" placeholder="Name" />
+            </nz-input-group>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+            <nz-input-group nzPrefixIcon="lock">
+                <input type="password" nz-input formControlName="password" placeholder="Password" />
+            </nz-input-group>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+            <nz-input-group nzPrefixIcon="lock">
+                <input type="email" nz-input formControlName="email" placeholder="Email" />
+            </nz-input-group>
+        </nz-form-control>
+    </nz-form-item>
+    
+    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">SignUp</button>
+    Or
+    <a>register now!</a>
+</form>
