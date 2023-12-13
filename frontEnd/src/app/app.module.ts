@@ -13,12 +13,15 @@ import ja from '@angular/common/locales/ja';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SignupComponent } from './comp/auth-compoent/signup/signup.component';
+import { AuthService } from './service/auth.service';
 
 registerLocaleData(ja);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +34,7 @@ registerLocaleData(ja);
     BrowserAnimationsModule
   ],
   providers: [
+    AuthService,
     provideClientHydration(),
     { provide: NZ_I18N, useValue: ja_JP }
   ],
