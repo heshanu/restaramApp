@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../service/auth.service';
 import { FormBuilder } from '@angular/forms';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -11,7 +12,7 @@ export class SignupComponent implements OnInit{
 
   isSpining!: boolean;
   
-  constructor(private authService: AuthService, private fb: FormBuilder) { }
+  constructor(private authService: AuthService,private notification:NzNotificationService,private fb: FormBuilder) { }
   validateForm!: FormGroup;
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -27,10 +28,12 @@ export class SignupComponent implements OnInit{
       this.authService.signUp(this.validateForm.value).subscribe(
         data => {
           console.log(data);
+          this.notification.success('Success', 'Sign Up Success');
           
         },
         err => {
           console.log(err);
+          this.notification.error('Error', 'Sign Up Failed');
         }
       );
 
