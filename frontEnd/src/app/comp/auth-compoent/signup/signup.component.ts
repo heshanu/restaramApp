@@ -8,6 +8,8 @@ import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@ang
   styleUrl: './signup.component.css'
 })
 export class SignupComponent implements OnInit{
+
+  isSpining!: boolean;
   
   constructor(private authService: AuthService, private fb: FormBuilder) { }
   validateForm!: FormGroup;
@@ -19,19 +21,19 @@ export class SignupComponent implements OnInit{
     });
   }
  
-  // validateForm:FormGroup<{
-  //   name: FormControl<string>;
-  //   password: FormControl<string>;
-  //   email: FormControl<string>;
-  // }> = this.fb.group({
-  //   name: ['', [Validators.required]],
-  //   password: ['', [Validators.required]],
-  //   email: ['', [Validators.required]]
-  // });
-
   submitForm(): void {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
+      this.authService.signUp(this.validateForm.value).subscribe(
+        data => {
+          console.log(data);
+          
+        },
+        err => {
+          console.log(err);
+        }
+      );
+
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
