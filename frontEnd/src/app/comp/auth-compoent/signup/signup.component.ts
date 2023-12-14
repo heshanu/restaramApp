@@ -3,6 +3,7 @@ import { AuthService } from '../../../service/auth.service';
 import { FormBuilder } from '@angular/forms';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -12,7 +13,7 @@ export class SignupComponent implements OnInit{
 
   isSpining!: boolean;
   
-  constructor(private authService: AuthService,private notification:NzNotificationService,private fb: FormBuilder) { }
+  constructor(private authService: AuthService,private message:NzMessageService,private notification:NzNotificationService,private fb: FormBuilder) { }
   validateForm!: FormGroup;
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -26,14 +27,14 @@ export class SignupComponent implements OnInit{
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
       this.authService.signUp(this.validateForm.value).subscribe(
-        data => {
-          console.log(data);
-          this.notification.success('Success', 'Sign Up Success', {nzDuration: 4000});
-          
+        (data:any) => {
+          this.message.success('Sign Up Success', { nzDuration: 5000 });
+          alert('Sign Up Success');
+          this.notification.success('Success', 'Sign Up Success', {nzDuration: 5000});
+          console.log(this.validateForm.value);
         },
         err => {
           console.log(err);
-          this.notification.error('Error', 'Sign Up Failed', {nzDuration: 4000});
         }
       );
 
@@ -44,7 +45,9 @@ export class SignupComponent implements OnInit{
           control.updateValueAndValidity({ onlySelf: true });
         }
       });
+      this.notification.error('Error', 'Sign Up Failed', {nzDuration: 4000});
     }
+    this.validateForm.reset();
   }
 
   

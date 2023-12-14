@@ -6,9 +6,9 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
-
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 @NgModule({
-    exports: [NzBackTopModule, NzFormModule,NzInputModule, NzSpinModule,NzNotificationModule,NzButtonModule,NzPageHeaderModule]
+    exports: [NzBackTopModule,NzMessageModule , NzFormModule,NzInputModule, NzSpinModule,NzNotificationModule,NzButtonModule,NzPageHeaderModule]
 })
 export class DemoNgZorroAntdModule { }
