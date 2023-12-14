@@ -18,6 +18,7 @@ import { AuthService } from './service/auth.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { DemoNgZorroAntdModule } from '../DemoNgZorrowModule';
 import { LoginComponent } from './comp/auth-compoent/login/login.component';
+import { StorageService } from './service/storage.service';
 
 registerLocaleData(ja);
 
@@ -41,7 +42,7 @@ registerLocaleData(ja);
     FormsModule,ReactiveFormsModule
   ],
   providers: [
-    AuthService,
+    AuthService,StorageService,
     provideClientHydration(),
     { provide: NZ_I18N, useValue: ja_JP }
   ],

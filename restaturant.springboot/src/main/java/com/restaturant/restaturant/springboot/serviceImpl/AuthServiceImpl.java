@@ -21,6 +21,14 @@ public class AuthServiceImpl implements AuthService{
         this.passwordEncoder = passwordEncoder;
     }
 
+    public void createAdminAccount(){
+        try {
+            
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     @Override
     public UserDTO createUser(SignUpRequest signUpRequest) {
         try{

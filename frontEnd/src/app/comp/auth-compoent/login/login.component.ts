@@ -7,6 +7,7 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 }                           from '@angular/router';
+import { StorageService } from '../../../service/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -14,9 +15,11 @@ import {
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+
   isSpining: boolean=false;
   
-  constructor(private authService: AuthService,private router:Router,private notification:NzNotificationService,private fb: FormBuilder) { }
+  constructor(private authService: AuthService,private storageService:StorageService,private router:Router,private notification:NzNotificationService,private fb: FormBuilder) { }
+  
   validateForm!: FormGroup;
   
   ngOnInit(): void {
@@ -30,11 +33,21 @@ export class LoginComponent {
     if (this.validateForm.valid) {
       this.isSpining = true;
       console.log('submit', this.validateForm.value);
-      this.authService.login(this.validateForm.value).subscribe(
-        data => {
-          console.log(data);
-          this.notification.success('Success', 'Login Success', { nzDuration: 4000 });
-          
+      this.authService.login(this.validateForm.value)
+        .subscribe(
+          data => {
+            console.log(JSON.stringify(data));
+            this.notification.success('Success', 'Login Success', { nzDuration: 4000 });  
+            
+            const user = {
+              id: data.userId,
+              role: data.userRole
+            };
+
+            this.storageService.saveUser(user);
+            this.storageService.saveToken(JSON.stringify(data));
+
+            //this.storageService.saveToken(data.token);
           //this.router.navigate(['/welcome']);
         },
         err => {
@@ -42,8 +55,9 @@ export class LoginComponent {
           this.notification.error('Error', 'Login Failed', {nzDuration: 4000});
         }
       );
-              this.isSpining = false;
+      this.isSpining = false;
       this.validateForm.reset();
+      //this.storageService.saveToken();
 
     } else {
               this.isSpining = false;
@@ -55,7 +69,5 @@ export class LoginComponent {
       });
     }
   }
-
   
-
 }
