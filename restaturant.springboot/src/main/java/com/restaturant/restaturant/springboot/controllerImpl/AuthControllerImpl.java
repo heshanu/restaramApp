@@ -6,6 +6,7 @@ import com.restaturant.restaturant.springboot.dto.AuthenticationResponse;
 import com.restaturant.restaturant.springboot.dto.SignUpRequest;
 import com.restaturant.restaturant.springboot.dto.UserDTO;
 import com.restaturant.restaturant.springboot.entity.UserEntity;
+import com.restaturant.restaturant.springboot.repo.UserRepo;
 import com.restaturant.restaturant.springboot.service.AuthService;
 import com.restaturant.restaturant.springboot.service.jwt.UserDetailsServiceImpl;
 import com.restaturant.restaturant.springboot.utils.JwtUtil;
@@ -23,17 +24,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 public class AuthControllerImpl implements AuthController {
     @Autowired
     private AuthService authService;
-
     @Autowired
     private JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
     @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private UserRepo userRepo;
 
     public AuthControllerImpl(UserDetailsServiceImpl userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -73,7 +76,13 @@ public class AuthControllerImpl implements AuthController {
         }
         final UserDetails userDetails= userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
         final String jwt=jwtUtil.generateToken(userDetails.getUsername());
-        return new AuthenticationResponse(jwt);
-
+        Optional<UserEntity> optionalUser=userRepo.findFirstByEmail(authenticationRequest.getEmail());
+        AuthenticationResponse authenticationResponse=new AuthenticationResponse();
+        if(optionalUser.isPresent()){
+            authenticationResponse.setJwt(jwt);
+            authenticationResponse.setUserRole(optionalUser.get().getUserRole());
+            authenticationResponse.setUserId(optionalUser.get().getId());
+        }
+        return authenticationResponse;
     }
 }
