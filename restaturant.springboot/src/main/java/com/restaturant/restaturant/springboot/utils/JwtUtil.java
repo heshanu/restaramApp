@@ -16,6 +16,7 @@ public class JwtUtil {
     public static final String SECRET="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQSflKxwRJSMeKKF2QT4fwpMeJf36POk6yJVadQssw5c";
     public String generateToken(String email){
         Map<String,Object> claims = new HashMap<>();
+        System.out.println("claims: "+claims);
         return createToken(claims,email);
     }
 
