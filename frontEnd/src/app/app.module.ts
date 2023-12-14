@@ -19,6 +19,9 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { DemoNgZorroAntdModule } from '../DemoNgZorrowModule';
 import { LoginComponent } from './comp/auth-compoent/login/login.component';
 import { StorageService } from './service/storage.service';
+import { AdminDashBoardComponent } from './modules/admin/admin-dash-board/admin-dash-board.component';
+import { CustomerDashBoardComponent } from './modules/customer/customer-dash-board/customer-dash-board.component';
+import { AddCategoryComponent } from './modules/admin/add-category/add-category.component';
 
 registerLocaleData(ja);
 
@@ -26,7 +29,8 @@ registerLocaleData(ja);
   declarations: [
     AppComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+
   ],
   imports: [
     BrowserModule,

@@ -23,8 +23,20 @@
             <li nz-menu-item nzMatchRouter routerLink="/login">
               <a>Login</a>
             </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Workplace</a>
+            <li *ngIf="isAdmin" nz-menu-item nzMatchRouter routerLink="/admin/dashboard">
+              <a>Admin Dashboard</a>
+            </li>
+            <li *ngIf="!isAdmin" nz-menu-item nzMatchRouter routerLink="/customer/dashboard">
+              <a>Customer Dashboard</a>
+            </li>
+            <li *ngIf="isAdmin" nz-menu-item nzMatchRouter routerLink="/admin/category">
+              <a>Admin Category</a>
+            </li>
+            <li *ngIf="!isAdmin" nz-menu-item nzMatchRouter routerLink="/customer/category">
+              <a>Customer Category</a>
+            </li>
+          <li nz-menu-item nzMatchRouter (click)="signOut()">
+            <a>SignOut</a>
           </li>
         </ul>
       </li>
