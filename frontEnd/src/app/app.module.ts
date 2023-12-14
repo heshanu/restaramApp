@@ -17,6 +17,7 @@ import { SignupComponent } from './comp/auth-compoent/signup/signup.component';
 import { AuthService } from './service/auth.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { DemoNgZorroAntdModule } from '../DemoNgZorrowModule';
+import { LoginComponent } from './comp/auth-compoent/login/login.component';
 
 registerLocaleData(ja);
 
@@ -24,6 +25,7 @@ registerLocaleData(ja);
   declarations: [
     AppComponent,
     SignupComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
