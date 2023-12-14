@@ -1,23 +1,44 @@
 package com.restaturant.restaturant.springboot.controllerImpl;
 
 import com.restaturant.restaturant.springboot.controller.AuthController;
+import com.restaturant.restaturant.springboot.dto.AuthenticationRequest;
+import com.restaturant.restaturant.springboot.dto.AuthenticationResponse;
 import com.restaturant.restaturant.springboot.dto.SignUpRequest;
 import com.restaturant.restaturant.springboot.dto.UserDTO;
 import com.restaturant.restaturant.springboot.entity.UserEntity;
 import com.restaturant.restaturant.springboot.service.AuthService;
+import com.restaturant.restaturant.springboot.service.jwt.UserDetailsServiceImpl;
+import com.restaturant.restaturant.springboot.utils.JwtUtil;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.Objects;
 
 @RestController
 public class AuthControllerImpl implements AuthController {
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private JwtUtil jwtUtil;
+    private final UserDetailsServiceImpl userDetailsService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    public AuthControllerImpl(UserDetailsServiceImpl userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
     @Override
     public ResponseEntity<String> signUpUser(SignUpRequest signUpRequest) {
        try{
@@ -34,5 +55,25 @@ public class AuthControllerImpl implements AuthController {
               e.printStackTrace();
        }
        return new ResponseEntity<>("unable to signup",HttpStatus.BAD_REQUEST);
+    }
+
+    @Override
+    public AuthenticationResponse createAuthenticationToken(AuthenticationRequest authenticationRequest, HttpServletResponse response ) throws IOException {
+        try{
+            authenticationManager.authenticate(new org.springframework.security.authentication.UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(),authenticationRequest.getPassword()));
+        }
+        catch(BadCredentialsException e){
+            throw new BadCredentialsException("incorrect username or password",e);
+        }
+        catch (DisabledException e){
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED,"user is disabled");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        final UserDetails userDetails= userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
+        final String jwt=jwtUtil.generateToken(userDetails.getUsername());
+        return new AuthenticationResponse(jwt);
+
     }
 }

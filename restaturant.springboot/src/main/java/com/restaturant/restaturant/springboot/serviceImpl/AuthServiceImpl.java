@@ -9,11 +9,17 @@ import com.restaturant.restaturant.springboot.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 @Service
 public class AuthServiceImpl implements AuthService{
     @Autowired
     private UserRepo userRepo;
+    private final PasswordEncoder passwordEncoder;
+
+    public AuthServiceImpl(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public UserDTO createUser(SignUpRequest signUpRequest) {
@@ -23,8 +29,7 @@ public class AuthServiceImpl implements AuthService{
             user.setEmail(signUpRequest.getEmail());
             user.setPassword(signUpRequest.getPassword());
             user.setUserRole(UserRoleEnum.CUSTOMER);
-            user.setPassword(user.getPassword());
-
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             UserEntity createUser=userRepo.save(user);
 
             UserDTO createUserDTO=new UserDTO();

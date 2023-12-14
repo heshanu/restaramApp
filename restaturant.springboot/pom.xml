@@ -47,11 +47,82 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-crypto</artifactId>
 			<version>6.2.0</version>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>6.2.0</version>
+        </dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-jwt -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-jwt</artifactId>
+			<version>1.1.1.RELEASE</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.vaadin/vaadin -->
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin</artifactId>
+			<version>24.3.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.12.3</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.12.3</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.vaadin.external.google/android-json -->
+		<dependency>
+			<groupId>com.vaadin.external.google</groupId>
+			<artifactId>android-json</artifactId>
+			<version>0.0.20131108.vaadin1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.nimbusds</groupId>
+			<artifactId>oauth2-oidc-sdk</artifactId>
+			<version>10.7.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.11.5</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.11.5</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.11.5</version>
+			<scope>runtime</scope>
+		</dependency>
+
 
 	</dependencies>
 
