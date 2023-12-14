@@ -36,23 +36,28 @@ export class LoginComponent {
       this.authService.login(this.validateForm.value)
         .subscribe(
           data => {
-            console.log(JSON.stringify(data));
+            
             this.notification.success('Success', 'Login Success', { nzDuration: 4000 });  
             
             const user = {
-              id: data.userId,
-              role: data.userRole
+              id:data.userId,
+              role: data?.userRole
             };
 
-            this.storageService.saveUser(user);
-            this.storageService.saveToken(JSON.stringify(data));
+            this.storageService.saveUser(JSON.stringify(user));
+            this.storageService.saveToken(data);
+            
+            if (this.storageService.isAdminLoggedIn()) {
+              this.router.navigate(['/admin/dashboard']);
+            }
+            else { this.router.navigate(['/customer/dashboard']); }
 
             //this.storageService.saveToken(data.token);
           //this.router.navigate(['/welcome']);
         },
         err => {
           console.log(err);
-          this.notification.error('Error', 'Login Failed', {nzDuration: 4000});
+          this.notification.error('Error', 'Login Failed Please check your credentials', {nzDuration: 4000});
         }
       );
       this.isSpining = false;
