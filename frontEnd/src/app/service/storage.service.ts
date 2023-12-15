@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 
 const TOKEN = "token";
 const USER="user details";
@@ -7,7 +7,7 @@ const USER="user details";
   providedIn: 'root'
 })
 export class StorageService {
-
+  
   constructor() { }
 
   public saveToken(token:any):void { 
@@ -31,7 +31,7 @@ export class StorageService {
   }
   
   public getUserRole():string{
-    let user = localStorage.getItem(TOKEN);
+    let user =localStorage.getItem(TOKEN);
     console.log(`userRole`, JSON.parse(user || "")["userRole"]);
     
     return JSON.parse(user || "")["userRole"];
@@ -43,5 +43,18 @@ export class StorageService {
     }
     return false;
   }
+
+  public signOut(): void {
+    window.localStorage.removeItem(TOKEN);
+    window.localStorage.removeItem(USER);
+    window.localStorage.clear();
+  }
+
+
+  
+  
+   
+
+  
 
 }

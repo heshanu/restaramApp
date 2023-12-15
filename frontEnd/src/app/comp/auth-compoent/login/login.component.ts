@@ -49,6 +49,7 @@ export class LoginComponent {
             
             if (this.storageService.isAdminLoggedIn()) {
               this.router.navigate(['/admin/dashboard']);
+              console.log(`adminLogin`,this.storageService.isAdminLoggedIn());
             }
             else { this.router.navigate(['/customer/dashboard']); }
 
