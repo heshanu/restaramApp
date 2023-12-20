@@ -22,6 +22,7 @@ import { StorageService } from './service/storage.service';
 import { AdminDashBoardComponent } from './modules/admin/admin-dash-board/admin-dash-board.component';
 import { CustomerDashBoardComponent } from './modules/customer/customer-dash-board/customer-dash-board.component';
 import { AddCategoryComponent } from './modules/admin/add-category/add-category.component';
+import { AdminService } from './service/admin.service';
 
 registerLocaleData(ja);
 
@@ -46,7 +47,7 @@ registerLocaleData(ja);
     FormsModule,ReactiveFormsModule
   ],
   providers: [
-    AuthService,StorageService,
+    AuthService,StorageService,AdminService,
     provideClientHydration(),
     { provide: NZ_I18N, useValue: ja_JP }
   ],
