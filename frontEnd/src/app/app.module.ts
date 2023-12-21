@@ -23,9 +23,11 @@ import { AdminDashBoardComponent } from './modules/admin/admin-dash-board/admin-
 import { CustomerDashBoardComponent } from './modules/customer/customer-dash-board/customer-dash-board.component';
 import { AddCategoryComponent } from './modules/admin/add-category/add-category.component';
 import { AdminService } from './service/admin.service';
+import { AdminModule } from './modules/admin/admin.module';
+import { CustomerModule } from './modules/customer/customer.module';
+
 
 registerLocaleData(ja);
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,14 +42,19 @@ registerLocaleData(ja);
     NzLayoutModule,
     NzMenuModule,
     FormsModule,
+    AdminModule,
+    CustomerModule,
     HttpClientModule,
     BrowserAnimationsModule,
     HttpClientModule,
     DemoNgZorroAntdModule,
-    FormsModule,ReactiveFormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
-    AuthService,StorageService,AdminService,
+    AuthService,
+    StorageService,
+    AdminService,
     provideClientHydration(),
     { provide: NZ_I18N, useValue: ja_JP }
   ],

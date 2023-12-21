@@ -9,6 +9,14 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 
 @NgModule({
-    exports: [NzBackTopModule,NzMessageModule , NzFormModule,NzInputModule, NzSpinModule,NzNotificationModule,NzButtonModule,NzPageHeaderModule]
+    exports: [NzBackTopModule,
+        NzMessageModule,
+        NzFormModule,
+        NzInputModule,
+        NzSpinModule,
+        NzNotificationModule,
+        NzButtonModule,
+        NzPageHeaderModule
+    ]
 })
 export class DemoNgZorroAntdModule { }
