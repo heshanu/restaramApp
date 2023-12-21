@@ -20,6 +20,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -40,8 +41,9 @@ public class WebSecurityConfiguration {
                         .requestMatchers("/api/v1/**").hasAnyAuthority(UserRoleEnum.ADMIN.name())
                         .anyRequest().authenticated())
                 .sessionManagement(management->management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProvider()).addFilterBefore(
-                        jwtAuthenticationFilter, JwtAuthenticationFilter.class);
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(
+                        jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
@@ -51,8 +53,6 @@ public class WebSecurityConfiguration {
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
-
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration){
         try {

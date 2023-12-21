@@ -21,7 +21,7 @@
         <nz-form-control  nzErrorTip="Please input your Photo!">
             <nz-input-group nzPrefixIcon="lock">
     
-                <input type="file" accept="image/x-png,image/gif,image/jpeg" nz-input formControlName="photo" (change)="onFileSelected($event)"/>
+                <input type="file" formControlName="img" accept="image/x-png,image/gif,image/jpeg" nz-input (change)="onFileSelected($event)"/>
             </nz-input-group>
         </nz-form-control>
     </nz-form-item>

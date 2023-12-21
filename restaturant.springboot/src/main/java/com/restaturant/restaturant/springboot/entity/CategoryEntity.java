@@ -2,7 +2,6 @@ package com.restaturant.restaturant.springboot.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 @Entity
 @Data
 @Table(name = "category")

@@ -12,7 +12,9 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 })
 export class AddCategoryComponent implements OnInit {
   
-  constructor(private message:NzMessageService,private notification:NzNotificationService,private adminService:AdminService,private fb: FormBuilder) { }
+  constructor(private message: NzMessageService,
+    private notification: NzNotificationService,
+    private adminService: AdminService, private fb: FormBuilder) { }
   
   validateForm!: FormGroup;
   selectedFile!: File | null;
@@ -22,25 +24,26 @@ export class AddCategoryComponent implements OnInit {
     this.validateForm = this.fb.group({
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      photo: ['', []],
+      img: ['', []],
     });
   }
   
   submitForm(): void {
     if (this.validateForm.valid) {
       console.log(this.validateForm.value);
-      const formData: FormData = new FormData();
+      const formData = new FormData();
       formData.append('name', this.validateForm.value.name);
       formData.append('description', this.validateForm.value.description);
-      formData.append('photo', this.imagePreview);
-      this.adminService.postCategory(formData).subscribe(
+      formData.append('img', this.imagePreview);
+
+      this.adminService.postCategory(this.validateForm).subscribe(
         (res) => { 
           console.log(res);
-          this.notification.success('Success', 'Sign Up Success', { nzDuration: 4000 });
+          this.notification.success('Success', 'Category Inserted Success', { nzDuration: 4000 });
         },
         (err) => {
-          console.log(err);
-          this.notification.error('Error', 'Sign Up Failed', { nzDuration: 4000 });
+          console.log(err.value);
+          this.notification.error('Error', 'Category Inserted Failed', { nzDuration: 4000 });
         }
       )
 

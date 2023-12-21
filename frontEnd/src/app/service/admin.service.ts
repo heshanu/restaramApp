@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
-const BASIC_URL = 'http://localhost:8080/api/v1';
+const BASIC_URL = 'http://localhost:8080/api/v1/admin';
 
 
 @Injectable({
@@ -21,7 +21,10 @@ export class AdminService {
 
   public createAuthorizationHeader():HttpHeaders{
     let authHeaders: HttpHeaders = new HttpHeaders();
-    return authHeaders.append('Authorization', 'Bearer ' + this.storageSerivice.getToeken());
+    console.log(`toe`, this.storageSerivice.getToeken());
+    let user = JSON.stringify(localStorage.getItem("token"));
+    console.log(``,  JSON.parse(user || "")["jwt"]);
+    return authHeaders.append('Authorization', 'Bearer ' +this.storageSerivice.getToeken() );
   }
 
 
