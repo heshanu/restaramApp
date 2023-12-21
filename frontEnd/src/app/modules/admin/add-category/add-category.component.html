@@ -1,1 +1,37 @@
-<p>add-category works!</p>
+<nz-page-header class="site-page-header" nzBackIcon nzTitle="Category Page"></nz-page-header>
+
+<form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+    <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your name!">
+            <nz-input-group nzPrefixIcon="user">
+                <input type="text" nz-input formControlName="name" placeholder="Food Name" />
+            </nz-input-group>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your description!">
+            <nz-input-group nzPrefixIcon="lock">
+                <input type="text" nz-input formControlName="description" placeholder="description" />
+            </nz-input-group>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-control  nzErrorTip="Please input your Photo!">
+            <nz-input-group nzPrefixIcon="lock">
+    
+                <input type="file" accept="image/x-png,image/gif,image/jpeg" nz-input formControlName="photo" (change)="onFileSelected($event)"/>
+            </nz-input-group>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item *ngIf="selectedFile">
+        <nz-form-control nzErrorTip="Please input your Photo!">
+                <img [src]="imagePreview" height="100" width="100" alt="image here" />
+        </nz-form-control>
+    </nz-form-item>
+    
+    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Post</button>
+    
+</form>
