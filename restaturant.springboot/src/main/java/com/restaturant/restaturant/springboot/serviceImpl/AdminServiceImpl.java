@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
+import java.util.List;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -33,4 +33,17 @@ public class AdminServiceImpl implements AdminService {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @Override
+    public List<CategoryEntity> getCategories() {
+        try{
+            return categoryRepo.findAll();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

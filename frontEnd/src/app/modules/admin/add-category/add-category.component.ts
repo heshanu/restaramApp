@@ -36,11 +36,13 @@ export class AddCategoryComponent implements OnInit {
       formData.append('description', this.validateForm.value.description);
       formData.append('img', this.imagePreview);
 
-      this.adminService.postCategory(this.validateForm).subscribe(
-        (res) => { 
-          console.log(res);
-          this.notification.success('Success', 'Category Inserted Success', { nzDuration: 4000 });
-        },
+      this.adminService.postCategory(this.validateForm.value).subscribe(
+        (res) => {
+          if (res.id != null) {
+            console.log(res);
+            this.notification.success('Success', 'Category Inserted Success', { nzDuration: 4000 });
+          }
+},
         (err) => {
           console.log(err.value);
           this.notification.error('Error', 'Category Inserted Failed', { nzDuration: 4000 });

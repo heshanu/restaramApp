@@ -11,5 +11,5 @@ public class CategoryDTO {
     private String description;
     private String name;
     private MultipartFile img;
-    private Byte[] returnImg;
+    private byte[] returnImg;
 }
