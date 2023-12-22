@@ -8,6 +8,5 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/admin")
 public interface AdminController {
     @PostMapping("/category")
-    public ResponseEntity<CategoryDTO> postCategory(@RequestBody CategoryDTO categoryDTO);
-
+    public ResponseEntity<CategoryDTO> postCategory(@ModelAttribute CategoryDTO categoryDTO);
 }

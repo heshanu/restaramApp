@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
+
 @RestController
 @RequiredArgsConstructor
 public class AdminControllerImpl implements AdminController {
@@ -15,7 +17,11 @@ public class AdminControllerImpl implements AdminController {
     private AdminService adminService;
     @Override
     public ResponseEntity<CategoryDTO> postCategory(CategoryDTO categoryDTO) {
+
         try{
+            if(Objects.isNull(categoryDTO)){
+                return ResponseEntity.badRequest().build();
+            }
             return adminService.postCategory(categoryDTO);
         }
         catch (Exception e){
