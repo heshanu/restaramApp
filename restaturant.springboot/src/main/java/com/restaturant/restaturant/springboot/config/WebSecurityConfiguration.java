@@ -29,10 +29,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfiguration {
     @Autowired
     private UserService userService;
-
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
